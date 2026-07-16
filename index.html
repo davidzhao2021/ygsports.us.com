@@ -5,64 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YGSports - 羽毛球商品展示</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f9f9f9; }
-        h1 { text-align: center; color: #0066cc; margin-bottom: 10px; }
-        .section { margin: 40px 0; }
-        .section h2 { text-align: center; color: #333; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; max-width: 1400px; margin: 0 auto; }
-        .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; padding-bottom: 15px; }
-        .card img { width: 100%; height: 220px; object-fit: cover; }
-        .photo-stack { position: relative; height: 240px; }
-        .photo-stack img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: all 0.4s; border-radius: 8px; }
-        .photo-stack img:nth-child(2) { transform: translate(15px, 15px); opacity: 0.9; }
-        .photo-stack:hover img:nth-child(2) { transform: translate(0, 0); z-index: 2; }
-        .info { padding: 10px 15px; }
-        .price { color: #e60000; font-weight: bold; font-size: 1.1em; }
+        body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; max-width: 900px; margin: 0 auto; }
+        h1, h2 { color: #0066cc; }
+        img { max-width: 100%; height: auto; margin: 15px 0; border-radius: 8px; }
+        .price { color: #e60000; font-weight: bold; }
     </style>
 </head>
 <body>
     <h1>🏸 YGSports 羽毛球商品展示</h1>
 
-    <!-- 羽毛球 -->
-    <div class="section">
-        <h2>羽毛球</h2>
-        <div class="grid">
-            <!-- 在这里复制卡片添加15个 -->
-            <div class="card">
-                <img src="https://via.placeholder.com/300x220?text=羽毛球1" alt="羽毛球">
-                <div class="info">
-                    <h3>产品名称1</h3>
-                    <p class="price">$25</p>
-                </div>
-            </div>
-        </div>
-    </div>
+    <h2>羽毛球</h2>
+    <p>• 黑航EG1130: <span class="price">$38.5</span></p>
+    <p>• RSL-(U/S/C/3）: $35.5/34.5/33.5/28.5</p>
+    <p>• JL-(S/A/B/C/D）：$35/33/30/27/23</p>
+    <p>• 胜利-(比赛1/黄金1）: $27.5/25.5</p>
+    <p>• YY-(AS05/30): $31.5/33.5</p>
+    <p>• 红超：$35.5</p>
+    <p>• 紫超：$32.5</p>
+    <p><strong>优惠</strong>：购买大牌球>=3桶每桶少$0.5；JL系列>=3桶每桶少$1。</p>
 
-    <!-- 球鞋（叠加照片） -->
-    <div class="section">
-        <h2>球鞋</h2>
-        <div class="grid">
-            <div class="card">
-                <div class="photo-stack">
-                    <img src="https://via.placeholder.com/300x240?text=球鞋正面" alt="球鞋">
-                    <img src="https://via.placeholder.com/300x240?text=球鞋侧面" alt="球鞋">
-                </div>
-                <div class="info">
-                    <h3>球鞋型号1</h3>
-                    <p class="price">$89</p>
-                </div>
-            </div>
-        </div>
-    </div>
+    <h2>拉线</h2>
+    <p>$26 全包各种型号的线，$18 自带线。免费更换损坏的护线管。隔一周取拍。</p>
+    <p>线材：BG 65、BG 65ti(+1)、BG 66u(+1)、BG 80(+2)、XB 63(+3)</p>
 
-    <!-- 其他分类类似结构... -->
-    <div class="card">
-    <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/socks.jpg" alt="袜子">
-    <div class="info">
-        <h3>Yonex 运动袜</h3>
-        <p class="price">$12</p>
-    </div>
-</div>
+    <h2>球拍</h2>
+    <p>日韩版，优于中国版/美版/台湾版/东南亚版</p>
+    <!-- 这里放 picture1 -->
+    <img src="你的球拍图片链接" alt="球拍">
 
+    <h2>球鞋</h2>
+    <p>需预定，1.5月到货</p>
+    <p>鞋码测量说明...</p>
+    <!-- picture2 picture3 -->
+
+    <h2>袜子</h2>
+    <p>$15 三双</p>
+    <!-- picture4 -->
+
+    <h2>球包</h2>
+    <p>• 哆啦A梦球包：大包 $90，小包 $50</p>
+    <!-- picture5 -->
+
+    <h2>手胶</h2>
+    <p>10个一套：单色 $7.5，双色 $8.5，三色 $9.5</p>
+    <!-- picture6 -->
+
+    <h2>周边</h2>
+    <!-- picture7 -->
+
+    <h2>付款 & 物流</h2>
+    <p>现金/支付宝/微信/公司账户。海运普货22元/kg，敏货42元/kg。</p>
+    <p>免税州服务可用。</p>
 </body>
 </html>
