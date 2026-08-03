@@ -62,10 +62,39 @@
         .nav a:hover {
             background: #004d99;
         }
+        /* 一键回顶按钮 */
+        #backToTop {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 48px;
+            height: 48px;
+            background: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 22px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            display: none;          /* 默认隐藏，滚动后才显示 */
+            z-index: 999;
+            transition: background 0.2s, transform 0.2s;
+        }
+        #backToTop:hover {
+            background: #004d99;
+            transform: scale(1.1);
+        }
         @media (max-width: 500px) {
             .nav a {
                 font-size: 13px;
                 padding: 7px 12px;
+            }
+            #backToTop {
+                bottom: 20px;
+                right: 18px;
+                width: 44px;
+                height: 44px;
+                font-size: 20px;
             }
         }
     </style>
@@ -153,5 +182,29 @@
     <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/others1.jpg" alt="others1" style="max-width:100%;">
     <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/others2.jpg" alt="others2" style="max-width:100%;">
 
+    <!-- 一键回顶按钮 -->
+    <button id="backToTop" title="回到顶部">↑</button>
+
+    <script>
+        // 一键回顶功能
+        const btn = document.getElementById("backToTop");
+
+        // 滚动超过 300px 时显示按钮
+        window.onscroll = function() {
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        };
+
+        // 点击回到顶部
+        btn.onclick = function() {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        };
+    </script>
 </body>
 </html>
