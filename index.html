@@ -76,7 +76,7 @@
             font-size: 22px;
             cursor: pointer;
             box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-            display: none;          /* 默认隐藏，滚动后才显示 */
+            display: none;
             z-index: 999;
             transition: background 0.2s, transform 0.2s;
         }
@@ -198,12 +198,9 @@
             }
         };
 
-        // 点击回到顶部
+        // 点击瞬间回到顶部
         btn.onclick = function() {
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
+            window.scrollTo(0, 0);
         };
     </script>
 </body>
