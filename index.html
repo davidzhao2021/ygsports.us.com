@@ -37,21 +37,21 @@
             color: #e60000;
             font-weight: bold;
         }
-        /* 导航样式 */
+        /* 导航：三列网格 */
         .nav {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 8px 12px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px 12px;
             margin: 20px 0 30px;
-            padding: 12px;
+            padding: 14px;
             background: #f5f9ff;
             border-radius: 12px;
             border: 1px solid #d0e3ff;
         }
         .nav a {
-            display: inline-block;
-            padding: 8px 14px;
+            display: block;
+            text-align: center;
+            padding: 10px 8px;
             background: #0066cc;
             color: white;
             text-decoration: none;
@@ -61,6 +61,10 @@
         }
         .nav a:hover {
             background: #004d99;
+        }
+        /* 最后一行只有2个时居中 */
+        .nav a:nth-last-child(1):nth-child(3n+2) {
+            grid-column: 2;
         }
         /* 一键回顶按钮 */
         #backToTop {
@@ -86,8 +90,8 @@
         }
         @media (max-width: 500px) {
             .nav a {
-                font-size: 13px;
-                padding: 7px 12px;
+                font-size: 12px;
+                padding: 8px 4px;
             }
             #backToTop {
                 bottom: 20px;
@@ -101,7 +105,6 @@
 </head>
 <body>
     <h1>YG Sports</h1>
-
     <!-- 导航栏 -->
     <div class="nav">
         <a href="#shuttlecock">羽毛球 Shuttlecock</a>
@@ -113,7 +116,6 @@
         <a href="#grips">手胶 Grips</a>
         <a href="#others">周边 Others</a>
     </div>
-
     <h2 id="shuttlecock">羽毛球 Shuttlecock</h2>
     <p>• 黑航空 Aeroplane EG1130: $37.5</p>
     <p>• 翎美 LingMei-F1 = 90Pro: $34</p>
@@ -125,7 +127,6 @@
     <p><strong>折扣</strong>：购买大牌产品满3桶，每桶减$0.5；购买JL系列产品满3桶，每桶减$1。量大优惠大。<br>
     Purchase 3 or more tubs of major-brand products and save $0.50 per tub; purchase 3 or more tubs of JL series products and save $1.00 per tub.
     </p>
-
     <h2 id="stringing">拉线 Stringing</h2>
     <p>• BG65($26)<br>
         • BG65ti($27)<br>
@@ -138,7 +139,6 @@
     
     <h2 id="rackets">球拍 Rackets</h2>
     <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/rackets3.jpg" alt="Rackets2" style="max-width:100%;">
-
     <h2 id="shoes">球鞋 Shoes</h2>
     <p>需预订。<br>
     Pre-order is required;
@@ -157,18 +157,15 @@
 3.  Add an extra 1–3 mm to the measurement to allow room for toe movement.<br>
 4.  Find the centimeter (cm) value closest to your adjusted measurement.</p>
     <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/size.jpg" alt="" style="max-width:100%;">
-
     <h2 id="socks">袜子 Socks</h2>
     <p>3双$20,男女尺码都有；3 pairs for $20, man/woman size.
     </p>
     <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/socks111.jpg" alt="socks111" style="max-width:100%;">
-
     <h2 id="bags">球包 Bags</h2>
     <p>大包 Big bag:$90，小包 Small bag:$50</p>
     <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/bigbag1.jpg" alt="bigbag1" style="max-width:100%;">
     <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/bigbag2.jpg" alt="bigbag2" style="max-width:100%;">
     <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/bigbag3.jpg" alt="bigbag3" style="max-width:100%;">
-
     <h2 id="grips">手胶 Grips</h2>
     <p>一套10个, Set of 10: <br>
         单色渐变Single-color $7.5<br>
@@ -176,21 +173,15 @@
         三色渐变three-color $9.5</p>
     <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/grips1.jpg" alt="grips1" style="max-width:100%;">
     <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/grips_final.jpg" alt="grips_final" style="max-width:100%;">
-
     <h2 id="others">周边 Others</h2>
     <p>Each small item is $10 if no price in the picture.<br>
     The shoe deodorizing spray works very well!</p>
     <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/others1.jpg" alt="others1" style="max-width:100%;">
     <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/others2.jpg" alt="others2" style="max-width:100%;">
-
     <!-- 一键回顶按钮 -->
     <button id="backToTop" title="回到顶部">↑</button>
-
     <script>
-        // 一键回顶功能
         const btn = document.getElementById("backToTop");
-
-        // 滚动超过 300px 时显示按钮
         window.onscroll = function() {
             if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
                 btn.style.display = "block";
@@ -198,8 +189,6 @@
                 btn.style.display = "none";
             }
         };
-
-        // 点击瞬间回到顶部
         btn.onclick = function() {
             window.scrollTo(0, 0);
         };
