@@ -37,6 +37,87 @@
             color: #e60000;
             font-weight: bold;
         }
+        /* ===== 球鞋横向滑动相册 ===== */
+        .carousel-wrap {
+            position: relative;
+            margin: 10px 0 26px;
+        }
+        .carousel-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2px 6px;
+            font-size: 13px;
+            color: #666;
+        }
+        .carousel-count {
+            font-weight: bold;
+            color: #0066cc;
+        }
+        .shoe-carousel {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding: 2px 2px 6px;
+        }
+        .shoe-carousel::-webkit-scrollbar {
+            display: none;
+        }
+        .shoe-carousel img {
+            flex: 0 0 92%;
+            max-width: 92%;
+            margin: 0;
+            scroll-snap-align: center;
+            scroll-snap-stop: always;
+        }
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(0, 102, 204, 0.85);
+            color: #fff;
+            font-size: 20px;
+            line-height: 1;
+            cursor: pointer;
+            z-index: 5;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .carousel-btn:hover { background: rgba(0, 77, 153, 0.95); }
+        .carousel-btn.prev { left: 6px; }
+        .carousel-btn.next { right: 6px; }
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 7px;
+            padding-top: 4px;
+        }
+        .carousel-dots button {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            border: none;
+            background: #c8dcf5;
+            cursor: pointer;
+            padding: 0;
+        }
+        .carousel-dots button.active {
+            background: #0066cc;
+            transform: scale(1.25);
+        }
+        @media (max-width: 500px) {
+            .carousel-btn { width: 36px; height: 36px; font-size: 18px; }
+        }
         /* 导航：三列网格 */
         .nav {
             display: grid;
@@ -134,7 +215,7 @@
         • BG80P / EX63 / AB($29)</p>
     <p>自备球线收费 18 美元。免费更换损坏的护线管。球拍可在 1-2 周内取回。<br>
         $18 if you provide your own string. Free replacement of damaged grommets. Racket ready for pickup in 1-2 week.</p>
-    
+
     <h2 id="rackets">球拍 Rackets</h2>
     <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/rackets1.png" alt="Rackets2" style="max-width:100%;">
     <h2 id="shoes">球鞋 Shoes</h2>
@@ -142,23 +223,47 @@
     Pre-order is required;
     </p>
     <h3>LiNing</h3>
-    <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/ln_se.jpg" alt="LiNing" style="max-width:100%;">
-    <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/ln_tdfx2pro.jpg" alt="LiNing" style="max-width:100%;">
-    <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/ln_tdfx3pro.jpg" alt="LiNing" style="max-width:100%;">
-    <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/ln_feiying.jpg" alt="LiNing" style="max-width:100%;">
-    <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/ln_df2.jpg" alt="LiNing" style="max-width:100%;"> 
+    <div class="carousel-wrap" data-carousel>
+        <div class="carousel-head"><span>👈 左右滑动查看 Swipe</span><span class="carousel-count">1 / 5</span></div>
+        <div class="shoe-carousel">
+            <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/ln_se.jpg" alt="LiNing">
+            <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/ln_tdfx2pro.jpg" alt="LiNing">
+            <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/ln_tdfx3pro.jpg" alt="LiNing">
+            <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/ln_feiying.jpg" alt="LiNing">
+            <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/ln_df2.jpg" alt="LiNing">
+        </div>
+        <button class="carousel-btn prev" type="button" aria-label="上一张">‹</button>
+        <button class="carousel-btn next" type="button" aria-label="下一张">›</button>
+        <div class="carousel-dots"></div>
+    </div>
     <h3>Victor</h3>
-    <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/vic_1.jpg" alt="Victor" style="max-width:100%;">
-    <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/vic_2.jpg" alt="Victor" style="max-width:100%;">
-    <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/vic_3.jpg" alt="Victor" style="max-width:100%;">
-    <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/vic_4_5.jpg" alt="Victor" style="max-width:100%;">
-    <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/vic_6_7.jpg" alt="Victor" style="max-width:100%;">
-    <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/vic_8.jpg" alt="Victor" style="max-width:100%;">
+    <div class="carousel-wrap" data-carousel>
+        <div class="carousel-head"><span>👈 左右滑动查看 Swipe</span><span class="carousel-count">1 / 6</span></div>
+        <div class="shoe-carousel">
+            <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/vic_1.jpg" alt="Victor">
+            <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/vic_2.jpg" alt="Victor">
+            <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/vic_3.jpg" alt="Victor">
+            <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/vic_4_5.jpg" alt="Victor">
+            <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/vic_6_7.jpg" alt="Victor">
+            <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/vic_8.jpg" alt="Victor">
+        </div>
+        <button class="carousel-btn prev" type="button" aria-label="上一张">‹</button>
+        <button class="carousel-btn next" type="button" aria-label="下一张">›</button>
+        <div class="carousel-dots"></div>
+    </div>
 
     <h3>Yonex</h3>
-    <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/yonex_GT.png" alt="Yonex" style="max-width:100%;">
-    <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/shoesyonex.jpg" alt="Yonex" style="max-width:100%;">
-    
+    <div class="carousel-wrap" data-carousel>
+        <div class="carousel-head"><span>👈 左右滑动查看 Swipe</span><span class="carousel-count">1 / 2</span></div>
+        <div class="shoe-carousel">
+            <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/yonex_GT.png" alt="Yonex">
+            <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/shoesyonex.jpg" alt="Yonex">
+        </div>
+        <button class="carousel-btn prev" type="button" aria-label="上一张">‹</button>
+        <button class="carousel-btn next" type="button" aria-label="下一张">›</button>
+        <div class="carousel-dots"></div>
+    </div>
+
     <p>Shoe Sizing: To ensure a perfect fit for your Yonex badminton shoes, please follow these steps: <br>
 1.  Wear the socks you typically use for badminton.<br>
 2.  Use a tape measure to measure your foot length from the tip of the longest toe to the heel.<br>
@@ -203,6 +308,58 @@
         btn.onclick = function() {
             window.scrollTo(0, 0);
         };
+    </script>
+    <script>
+        // 球鞋相册：滑动 / 箭头 / 圆点 / 计数
+        document.querySelectorAll("[data-carousel]").forEach(function(wrap) {
+            const track = wrap.querySelector(".shoe-carousel");
+            const slides = Array.from(track.querySelectorAll("img"));
+            const count = wrap.querySelector(".carousel-count");
+            const dotsBox = wrap.querySelector(".carousel-dots");
+            const prev = wrap.querySelector(".carousel-btn.prev");
+            const next = wrap.querySelector(".carousel-btn.next");
+            let index = 0;
+
+            slides.forEach(function(_, i) {
+                const d = document.createElement("button");
+                d.type = "button";
+                d.setAttribute("aria-label", "第" + (i + 1) + "张");
+                if (i === 0) d.classList.add("active");
+                d.onclick = function() { goTo(i); };
+                dotsBox.appendChild(d);
+            });
+            const dots = Array.from(dotsBox.querySelectorAll("button"));
+
+            function stepWidth() {
+                if (slides.length < 2) return track.clientWidth;
+                return slides[1].offsetLeft - slides[0].offsetLeft;
+            }
+            function goTo(i) {
+                index = Math.max(0, Math.min(i, slides.length - 1));
+                track.scrollTo({ left: index * stepWidth(), behavior: "smooth" });
+                render();
+            }
+            function render() {
+                if (count) count.textContent = (index + 1) + " / " + slides.length;
+                dots.forEach(function(d, i) { d.classList.toggle("active", i === index); });
+                if (prev) prev.style.opacity = index === 0 ? "0.35" : "1";
+                if (next) next.style.opacity = index === slides.length - 1 ? "0.35" : "1";
+            }
+            let ticking = false;
+            track.addEventListener("scroll", function() {
+                if (ticking) return;
+                ticking = true;
+                requestAnimationFrame(function() {
+                    index = Math.round(track.scrollLeft / stepWidth());
+                    index = Math.max(0, Math.min(index, slides.length - 1));
+                    render();
+                    ticking = false;
+                });
+            }, { passive: true });
+            if (prev) prev.onclick = function() { goTo(index - 1); };
+            if (next) next.onclick = function() { goTo(index + 1); };
+            render();
+        });
     </script>
 </body>
 </html>
