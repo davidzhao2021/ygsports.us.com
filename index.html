@@ -44,7 +44,7 @@
         }
         .carousel-head {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             align-items: center;
             padding: 0 2px 6px;
             font-size: 13px;
@@ -224,7 +224,7 @@
     </p>
     <h3>LiNing</h3>
     <div class="carousel-wrap" data-carousel>
-        <div class="carousel-head"><span>👈 左右滑动查看 Swipe</span><span class="carousel-count">1 / 5</span></div>
+        <div class="carousel-head"><span class="carousel-count">1 / 5</span></div>
         <div class="shoe-carousel">
             <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/ln_se.jpg" alt="LiNing">
             <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/ln_tdfx2pro.jpg" alt="LiNing">
@@ -238,7 +238,7 @@
     </div>
     <h3>Victor</h3>
     <div class="carousel-wrap" data-carousel>
-        <div class="carousel-head"><span>👈 左右滑动查看 Swipe</span><span class="carousel-count">1 / 6</span></div>
+        <div class="carousel-head"><span class="carousel-count">1 / 6</span></div>
         <div class="shoe-carousel">
             <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/vic_1.jpg" alt="Victor">
             <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/vic_2.jpg" alt="Victor">
@@ -254,7 +254,7 @@
 
     <h3>Yonex</h3>
     <div class="carousel-wrap" data-carousel>
-        <div class="carousel-head"><span>👈 左右滑动查看 Swipe</span><span class="carousel-count">1 / 2</span></div>
+        <div class="carousel-head"><span class="carousel-count">1 / 2</span></div>
         <div class="shoe-carousel">
             <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/shoesyonex.jpg" alt="Yonex">
         </div>
@@ -284,14 +284,30 @@
     <p>一套10个, Set of 10: <br>
         渐变薄手胶$10/Color change thin grip<br>
         单色厚手胶$20</p>
-    <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/grips1.jpg" alt="grips1" style="max-width:100%;">
-    <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/grips_final.jpg" alt="grips_final" style="max-width:100%;">
+    <div class="carousel-wrap" data-carousel>
+        <div class="carousel-head"><span class="carousel-count">1 / 2</span></div>
+        <div class="shoe-carousel">
+            <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/grips1.jpg" alt="grips1">
+            <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/grips_final.jpg" alt="grips_final">
+        </div>
+        <button class="carousel-btn prev" type="button" aria-label="上一张">‹</button>
+        <button class="carousel-btn next" type="button" aria-label="下一张">›</button>
+        <div class="carousel-dots"></div>
+    </div>
     <h2 id="others">周边 Others</h2>
     <p>Each small item is $10 if no price in the picture.<br>
     The shoe deodorizing spray works very well!</p>
-    <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/cansaipai.png" alt="others2" style="max-width:100%;">
-    <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/others1.jpg" alt="others1" style="max-width:100%;">
-    <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/others2.jpg" alt="others2" style="max-width:100%;">
+    <div class="carousel-wrap" data-carousel>
+        <div class="carousel-head"><span class="carousel-count">1 / 3</span></div>
+        <div class="shoe-carousel">
+            <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/cansaipai.png" alt="others2">
+            <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/others1.jpg" alt="others1">
+            <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/others2.jpg" alt="others2">
+        </div>
+        <button class="carousel-btn prev" type="button" aria-label="上一张">‹</button>
+        <button class="carousel-btn next" type="button" aria-label="下一张">›</button>
+        <div class="carousel-dots"></div>
+    </div>
 
     <!-- 一键回顶按钮 -->
     <button id="backToTop" title="回到顶部">↑</button>
