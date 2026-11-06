@@ -10,11 +10,10 @@
          注意：这是另一个网站 ygsports.us.com，要新建一个 GA 媒体资源/数据流，
          拿一个新的测量 ID，不要复用 ygfood 的 G-EKRVHGE077，否则两个站的数据
          会混进同一个报表，分不开。
-         启用方法：把下面 GA_MEASUREMENT_ID 的 G-XXXXXXXXXX 换成 ygsports 的
-         真实测量 ID（格式 G- 开头），重新上传 index.html 即可开始统计。
-         未填真实 ID 前，页面正常显示，不报错、不发任何数据。 -->
+         已填入真实测量 ID：G-LT7RF1VFJ7（ygsports 数据流，2026-11-05）。
+         上传 index.html 到 GitHub 后即开始统计。 -->
     <script>
-        var GA_MEASUREMENT_ID = "G-XXXXXXXXXX"; // ← 只改这一行（ygsports 的新 ID）
+        var GA_MEASUREMENT_ID = "G-LT7RF1VFJ7"; // 2026-11-05 mj 的 GA4 测量 ID（ygsports 数据流，Stream ID 16283580751）
         window.dataLayer = window.dataLayer || [];
         function gtag(){ window.dataLayer.push(arguments); }
         if (/^G-[A-Z0-9]{6,}$/.test(GA_MEASUREMENT_ID)) {
