@@ -4,6 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YG Sports</title>
+    <!-- ===== 浏览/点击统计（Google Analytics 4，仅店主可见） =====
+         页面上不显示任何数字。数据只进你的 GA 后台，需登录你的 Google 账号才能看，
+         访客在页面上什么都看不到。
+         注意：这是另一个网站 ygsports.us.com，要新建一个 GA 媒体资源/数据流，
+         拿一个新的测量 ID，不要复用 ygfood 的 G-EKRVHGE077，否则两个站的数据
+         会混进同一个报表，分不开。
+         启用方法：把下面 GA_MEASUREMENT_ID 的 G-XXXXXXXXXX 换成 ygsports 的
+         真实测量 ID（格式 G- 开头），重新上传 index.html 即可开始统计。
+         未填真实 ID 前，页面正常显示，不报错、不发任何数据。 -->
+    <script>
+        var GA_MEASUREMENT_ID = "G-XXXXXXXXXX"; // ← 只改这一行（ygsports 的新 ID）
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ window.dataLayer.push(arguments); }
+        if (/^G-[A-Z0-9]{6,}$/.test(GA_MEASUREMENT_ID)) {
+            var gaScript = document.createElement("script");
+            gaScript.async = true;
+            gaScript.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_MEASUREMENT_ID;
+            document.head.appendChild(gaScript);
+            gtag("js", new Date());
+            gtag("config", GA_MEASUREMENT_ID);
+        }
+    </script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -232,7 +254,7 @@
         <div class="shoe-carousel">
             <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/ln_feiying.jpg" alt="LiNing">
             <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/ln_df2.jpg" alt="LiNing">
-            <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/ln_11.jpg" alt="LiNing">
+            <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/ln_%231.jpg" alt="LiNing">
             <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/ln_tdfx2pro.jpg" alt="LiNing">
             <img src="https://raw.githubusercontent.com/davidzhao2021/ygsports.us.com/main/ln_tdfx3pro.jpg" alt="LiNing">
         </div>
@@ -371,6 +393,88 @@
             if (prev) prev.onclick = function() { goTo(index - 1); };
             if (next) next.onclick = function() { goTo(index + 1); };
             render();
+        });
+    </script>
+    <script>
+        // ===== 点击统计：只发给 GA 后台，页面上不显示 =====
+        function ygTrack(eventName, params) {
+            if (!/^G-[A-Z0-9]{6,}$/.test(GA_MEASUREMENT_ID)) return; // 未填真实 ID 不发数据
+            if (typeof gtag === "function") gtag("event", eventName, params || {});
+        }
+        // 从元素往前找最近的 h2（大分类）和 h3（小分类，如球鞋品牌）
+        function sectionOf(el) {
+            var category = null, subcategory = null;
+            var node = el;
+            while (node && node !== document.body) {
+                var prev = node.previousElementSibling;
+                while (prev) {
+                    if (!subcategory && prev.tagName === "H3") subcategory = prev.textContent.trim();
+                    if (prev.tagName === "H2") { category = prev; break; }
+                    prev = prev.previousElementSibling;
+                }
+                if (category) break;
+                node = node.parentElement;
+            }
+            if (!category) return {};
+            var info = { category_id: category.id, category_name: category.textContent.trim() };
+            if (subcategory) info.subcategory = subcategory;
+            return info;
+        }
+        // 1) 顶部导航点击：点了哪个分类
+        document.querySelectorAll(".nav a").forEach(function(a) {
+            a.addEventListener("click", function() {
+                ygTrack("category_nav_click", {
+                    category_id: a.getAttribute("href").replace("#", ""),
+                    category_name: a.textContent.trim()
+                });
+            });
+        });
+        // 2) 板块浏览：滑到哪个分类（每个分类每打开一次只记一次）
+        var seen = {};
+        if ("IntersectionObserver" in window) {
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    var id = entry.target.id;
+                    if (entry.isIntersecting && !seen[id]) {
+                        seen[id] = true;
+                        ygTrack("category_view", {
+                            category_id: id,
+                            category_name: entry.target.textContent.trim()
+                        });
+                    }
+                });
+            }, { threshold: 0.3 });
+            document.querySelectorAll("h2[id]").forEach(function(h) { observer.observe(h); });
+        }
+        // 3) 相册箭头 / 圆点点击：哪个分类、哪个品牌被翻了
+        document.querySelectorAll("[data-carousel]").forEach(function(wrap) {
+            var info = sectionOf(wrap);
+            wrap.querySelectorAll(".carousel-btn.prev, .carousel-btn.next").forEach(function(btn) {
+                btn.addEventListener("click", function() {
+                    ygTrack("carousel_click", Object.assign({}, info, {
+                        direction: btn.classList.contains("prev") ? "prev" : "next"
+                    }));
+                });
+            });
+            wrap.querySelectorAll(".carousel-dots button").forEach(function(dot, i) {
+                dot.addEventListener("click", function() {
+                    ygTrack("carousel_click", Object.assign({}, info, {
+                        direction: "dot", slide_index: i + 1
+                    }));
+                });
+            });
+        });
+        // 4) 产品图点击
+        document.querySelectorAll("body img").forEach(function(img) {
+            img.addEventListener("click", function() {
+                var info = sectionOf(img);
+                if (info.category_id) ygTrack("product_image_click", info);
+            });
+        });
+        // 5) 回到顶部点击
+        var backBtn = document.getElementById("backToTop");
+        if (backBtn) backBtn.addEventListener("click", function() {
+            ygTrack("back_to_top_click", {});
         });
     </script>
 </body>
