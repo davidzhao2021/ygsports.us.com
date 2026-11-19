@@ -393,6 +393,7 @@
             pushRow(r1); pushRow(r2); pushRow(r3);
             if (!rows.length) {
                 result.innerHTML = "";
+                result.style.display = "none";
                 return;
             }
             // 贵的先算：按售价从高到低排，9折那档落在便宜的球上，你让得最少
@@ -418,6 +419,7 @@
             html += '<div class="tier-line tier-total"><span>总价 Total（' + totalTubes + '桶 / ' + totalTubes + ' tube' + (totalTubes === 1 ? '' : 's') + '）</span><span class="price">' + money(total) + '</span></div>';
             if (total < list) html += '<div class="tier-line tier-hot"><span>比原价省 You save</span><span>' + money(list - total) + '（原价 List ' + money(list) + '）</span></div>';
             result.innerHTML = warn + html;
+            result.style.display = "";
             // 第一次算出有效价格时，记一次使用（每个访客每次打开只记一次）
             if (!tracked && typeof ygTrack === "function") {
                 tracked = true;
