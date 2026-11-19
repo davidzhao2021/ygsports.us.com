@@ -392,7 +392,7 @@
             var r3 = readRow(model3, qty3);
             pushRow(r1); pushRow(r2); pushRow(r3);
             if (!rows.length) {
-                result.innerHTML = "<p>请选择型号并输入桶数（1–999）。<br>Please select a model and enter a quantity (1–999).</p>";
+                result.innerHTML = "";
                 return;
             }
             // 贵的先算：按售价从高到低排，9折那档落在便宜的球上，你让得最少
