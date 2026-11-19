@@ -293,11 +293,12 @@
         <div class="tier-controls">
             <label>型号 1 Model 1
                 <select id="tierModel1">
+                    <option value="" selected>— 请选择型号 Select a model —</option>
                     <option value="AS05 Yonex" data-price="3300" data-profit="1236">AS05 Yonex — $33/桶 / tube</option>
                     <option value="AS30 Yonex" data-price="3900" data-profit="1131">AS30 Yonex — $39/桶 / tube</option>
                     <option value="AS40 Yonex" data-price="4200" data-profit="1326">AS40 Yonex — $42/桶 / tube</option>
                     <option value="AS50 Yonex" data-price="4500" data-profit="1102">AS50 Yonex — $45/桶 / tube</option>
-                    <option value="黑航空 Aeroplane EG1130" data-price="3800" data-profit="926" selected>黑航空 Aeroplane EG1130 — $38/桶 / tube</option>
+                    <option value="黑航空 Aeroplane EG1130" data-price="3800" data-profit="926">黑航空 Aeroplane EG1130 — $38/桶 / tube</option>
                     <option value="红超 ChaoPai" data-price="3600" data-profit="1251">红超 ChaoPai — $36/桶 / tube</option>
                     <option value="紫超 ChaoPai" data-price="3200" data-profit="851">紫超 ChaoPai — $32/桶 / tube</option>
                     <option value="金利 JL-S" data-price="3400" data-profit="950">金利 JL-S — $34/桶 / tube</option>
@@ -317,11 +318,11 @@
                 </select>
             </label>
             <label>桶数 Tubes
-                <input id="tierQty1" type="number" min="1" max="999" step="1" value="10" inputmode="numeric">
+                <input id="tierQty1" type="number" min="1" max="999" step="1" value="" placeholder="0" inputmode="numeric">
             </label>
         </div>
         <div class="tier-controls">
-            <label>型号 2 Model 2（混搭，不混搭留空 · Mixed order, leave blank if not mixing）
+            <label>型号 2 Model 2（Mixed order, leave blank if not mixing）
                 <select id="tierModel2">
                     <option value="">— 不混搭 No mixing —</option>
                 </select>
@@ -331,7 +332,7 @@
             </label>
         </div>
         <div class="tier-controls">
-            <label>型号 3 Model 3（混搭，不混搭留空 · Mixed order, leave blank if not mixing）
+            <label>型号 3 Model 3（Mixed order, leave blank if not mixing）
                 <select id="tierModel3">
                     <option value="">— 不混搭 No mixing —</option>
                 </select>
@@ -344,7 +345,7 @@
     </div>
     <script>
     (function () {
-        // 阶梯价：前3桶原价，接下来12桶9.5折，其余9折。全部按分（整数）算，避免浮点误差。
+        // 阶梯价：前3桶原价，接下来7桶9.5折，其余9折。全部按分（整数）算，避免浮点误差。
         // 混搭限3款；后台按售价从高到低排（贵的先算原价/9.5折），你让出去的折扣最少。
         var model1 = document.getElementById("tierModel1");
         var qty1 = document.getElementById("tierQty1");
@@ -354,8 +355,9 @@
         var qty3 = document.getElementById("tierQty3");
         var result = document.getElementById("tierResult");
         var tracked = false;
-        // 型号2、3的选项与型号1完全一致（按品牌名排），前面留一个“不混搭”
+        // 型号2、3的选项与型号1完全一致（按品牌名排），前面留一个“不混搭”；型号1开头的“请选择型号”不复制过去
         for (var i = 0; i < model1.options.length; i++) {
+            if (!model1.options[i].value) continue;
             var c2 = model1.options[i].cloneNode(true);
             c2.selected = false;
             model2.appendChild(c2);
