@@ -4,12 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YG Sports</title>
-    <!-- ===== 浏览/点击统计（Google Analytics 4，仅店主可见） =====
-         页面上不显示任何数字。数据只进你的 GA 后台，需登录你的 Google 账号才能看，
-         访客在页面上什么都看不到。
-         注意：这是另一个网站 ygsports.us.com，要新建一个 GA 媒体资源/数据流，
-         拿一个新的测量 ID，不要复用 ygfood 的 G-EKRVHGE077，否则两个站的数据
-         会混进同一个报表，分不开。
+    <!-- ===== 浏览/点击统计（Google Analytics 4） =====
+         页面上不显示任何数字。数据发给 Google Analytics 处理，
+         需登录你的 Google 账号、在 GA 后台才能看。
          已填入真实测量 ID：G-LT7RF1VFJ7（ygsports 数据流，2026-11-05）。
          上传 index.html 到 GitHub 后即开始统计。 -->
     <script>
@@ -208,6 +205,71 @@
                 font-size: 25px;
             }
         }
+        /* ===== 阶梯价计算器 ===== */
+        .tier-calc {
+            background: #f5f9ff;
+            border: 1px solid #d0e3ff;
+            border-radius: 12px;
+            padding: 16px;
+            margin: 14px 0 20px;
+        }
+        .tier-calc h3 {
+            color: #0066cc;
+            text-align: center;
+            margin: 0 0 8px;
+            font-size: 19px;
+        }
+        .tier-rule {
+            text-align: center;
+            color: #333;
+            margin: 0 0 12px;
+        }
+        .tier-controls {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .tier-controls label {
+            flex: 1 1 200px;
+            font-weight: bold;
+            font-size: 14px;
+            color: #333;
+        }
+        .tier-controls select,
+        .tier-controls input {
+            display: block;
+            width:100%;
+            margin-top: 6px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #b9d2f2;
+            border-radius: 8px;
+            background: #fff;
+            box-sizing: border-box;
+        }
+        .tier-result {
+            background: #fff;
+            border: 1px solid #d0e3ff;
+            border-radius: 8px;
+            padding: 12px 14px;
+            font-size: 15px;
+            line-height: 1.9;
+        }
+        .tier-line {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .tier-total {
+            border-top: 1px solid #d0e3ff;
+            margin-top: 8px;
+            padding-top: 8px;
+            font-size: 18px;
+        }
+        .tier-hot {
+            color: #d32f2f;
+            font-weight: 700;
+        }
     </style>
 </head>
 <body>
@@ -223,16 +285,159 @@
         <a href="#others">周边 Others</a>
     </div>
     <h2 id="shuttlecock">羽毛球 Shuttlecock</h2>
+    <!-- ===== 阶梯价计算器：选型号、填桶数，自动算总价 ===== -->
+    <div class="tier-calc" id="tierCalc">
+        <h3>阶梯价计算器 Tier Price Calculator</h3>
+        <p class="tier-rule">第1–3桶原价，第4–15桶9.5折，第16桶起9折。折扣只算该段内的桶。混搭限3款，总数进阶。<span class="tier-hot">拼单更划算。</span><br>
+        First 3 tubs list price, tubs 4–15 at 5% off, tubs 16+ at 10% off. Discount applies only to tubs in each band. Max 3 models per mixed order. <span class="tier-hot">Group orders save more.</span></p>
+        <div class="tier-controls">
+            <label>型号 1 Model 1
+                <select id="tierModel1">
+                    <option value="黑航空 Aeroplane EG1130" data-price="3700" data-profit="826" selected>黑航空 Aeroplane EG1130 — $37/桶</option>
+                    <option value="红超 ChaoPai" data-price="3600" data-profit="1251">红超 ChaoPai — $36/桶</option>
+                    <option value="紫超 ChaoPai" data-price="3200" data-profit="851">紫超 ChaoPai — $32/桶</option>
+                    <option value="金利 JL-S" data-price="3400" data-profit="950">金利 JL-S — $34/桶</option>
+                    <option value="金利 JL-A" data-price="3200" data-profit="750">金利 JL-A — $32/桶</option>
+                    <option value="金利 JL-C" data-price="2700" data-profit="801">金利 JL-C — $27/桶</option>
+                    <option value="翎美 90Pro/F1" data-price="3600" data-profit="786">翎美 90Pro/F1 — $36/桶</option>
+                    <option value="亚狮龙 RSL-3" data-price="2650" data-profit="751">亚狮龙 RSL-3 — $26.50/桶</option>
+                    <option value="亚狮龙 RSL-5" data-price="2350" data-profit="751">亚狮龙 RSL-5 — $23.50/桶</option>
+                    <option value="亚狮龙 RSL-C" data-price="3250" data-profit="826">亚狮龙 RSL-C — $32.50/桶</option>
+                    <option value="亚狮龙 RSL-S" data-price="3600" data-profit="1101">亚狮龙 RSL-S — $36/桶</option>
+                    <option value="亚狮龙 RSL-U" data-price="3800" data-profit="926">亚狮龙 RSL-U — $38/桶</option>
+                    <option value="大师1 Victor" data-price="3750" data-profit="981">大师1 Victor — $37.50/桶</option>
+                    <option value="比赛1 Victor" data-price="2850" data-profit="951">比赛1 Victor — $28.50/桶</option>
+                    <option value="黄金一 Victor" data-price="2650" data-profit="976">黄金一 Victor — $26.50/桶</option>
+                    <option value="NCS MAX Victor" data-price="2700" data-profit="936">NCS MAX Victor — $27/桶</option>
+                    <option value="NCS PRO Victor" data-price="2200" data-profit="736">NCS PRO Victor — $22/桶</option>
+                    <option value="AS05 Yonex" data-price="3250" data-profit="1186">AS05 Yonex — $32.50/桶</option>
+                    <option value="AS30 Yonex" data-price="3900" data-profit="1131">AS30 Yonex — $39/桶</option>
+                    <option value="AS40 Yonex" data-price="4100" data-profit="1226">AS40 Yonex — $41/桶</option>
+                    <option value="AS50 Yonex" data-price="4300" data-profit="902">AS50 Yonex — $43/桶</option>
+                </select>
+            </label>
+            <label>桶数 Tubs
+                <input id="tierQty1" type="number" min="1" max="999" step="1" value="10" inputmode="numeric">
+            </label>
+        </div>
+        <div class="tier-controls">
+            <label>型号 2 Model 2（混搭，不混搭留空）
+                <select id="tierModel2">
+                    <option value="">— 不混搭 —</option>
+                </select>
+            </label>
+            <label>桶数 Tubs
+                <input id="tierQty2" type="number" min="1" max="999" step="1" value="" placeholder="0" inputmode="numeric">
+            </label>
+        </div>
+        <div class="tier-controls">
+            <label>型号 3 Model 3（混搭，不混搭留空）
+                <select id="tierModel3">
+                    <option value="">— 不混搭 —</option>
+                </select>
+            </label>
+            <label>桶数 Tubs
+                <input id="tierQty3" type="number" min="1" max="999" step="1" value="" placeholder="0" inputmode="numeric">
+            </label>
+        </div>
+        <div class="tier-result" id="tierResult"></div>
+    </div>
+    <script>
+    (function () {
+        // 阶梯价：前3桶原价，接下来12桶9.5折，其余9折。全部按分（整数）算，避免浮点误差。
+        // 混搭限3款；后台按售价从高到低排（贵的先算原价/9.5折），你让出去的折扣最少。
+        var model1 = document.getElementById("tierModel1");
+        var qty1 = document.getElementById("tierQty1");
+        var model2 = document.getElementById("tierModel2");
+        var qty2 = document.getElementById("tierQty2");
+        var model3 = document.getElementById("tierModel3");
+        var qty3 = document.getElementById("tierQty3");
+        var result = document.getElementById("tierResult");
+        var tracked = false;
+        // 型号2、3的选项与型号1完全一致（按品牌名排），前面留一个“不混搭”
+        for (var i = 0; i < model1.options.length; i++) {
+            var c2 = model1.options[i].cloneNode(true);
+            c2.selected = false;
+            model2.appendChild(c2);
+            var c3 = model1.options[i].cloneNode(true);
+            c3.selected = false;
+            model3.appendChild(c3);
+        }
+        model2.selectedIndex = 0;
+        model3.selectedIndex = 0;
+        function money(cents) { return "$" + (cents / 100).toFixed(2); }
+        function line(label, cents) {
+            return '<div class="tier-line"><span>' + label + '</span><span>' + money(cents) + '</span></div>';
+        }
+        function readRow(sel, qtyEl) {
+            var opt = sel.options[sel.selectedIndex];
+            if (!opt || !opt.value) return null;
+            var q = Math.floor(Number(qtyEl.value));
+            if (!q || q < 1) return { name: opt.value, price: 0, qty: 0, missingQty: true };
+            if (q > 999) { q = 999; qtyEl.value = "999"; }
+            return { name: opt.value, price: parseInt(opt.getAttribute("data-price"), 10), qty: q };
+        }
+        function calc() {
+            var rows = [];
+            function pushRow(r) {
+                if (!r || r.qty <= 0) return;
+                var same = null;
+                rows.forEach(function (e) { if (e.name === r.name) same = e; });
+                if (same) same.qty += r.qty; else rows.push(r);
+            }
+            var r1 = readRow(model1, qty1);
+            var r2 = readRow(model2, qty2);
+            var r3 = readRow(model3, qty3);
+            pushRow(r1); pushRow(r2); pushRow(r3);
+            if (!rows.length) {
+                result.innerHTML = "<p>请选择型号并输入桶数（1–999）。</p>";
+                return;
+            }
+            // 贵的先算：按售价从高到低排，9折那档落在便宜的球上，你让得最少
+            rows.sort(function (a, b) { return b.price - a.price; });
+            var totalTubs = 0, total = 0, list = 0, html = "", warn = "";
+            rows.forEach(function (e) { totalTubs += e.qty; list += e.qty * e.price; });
+            if ((r2 && r2.missingQty) || (r3 && r3.missingQty)) warn = "<p>有型号没填桶数，只算了填了桶数的型号。</p>";
+            var cursor = 0;
+            var bands = [[0, 3, 100, "原价"], [3, 15, 95, "9.5折"], [15, Infinity, 90, "9折"]];
+            rows.forEach(function (e) {
+                var start = cursor, end = cursor + e.qty;
+                bands.forEach(function (b) {
+                    var lo = Math.max(start, b[0]), hi = Math.min(end, b[1]);
+                    var n = Math.max(0, hi - lo);
+                    if (!n) return;
+                    var c = Math.round(n * e.price * b[2] / 100);
+                    total += c;
+                    var range = n === 1 ? "第" + (lo + 1) + "桶" : "第" + (lo + 1) + "–" + hi + "桶";
+                    html += line(e.name + " — " + range + "（" + b[3] + "）", c);
+                });
+                cursor = end;
+            });
+            html += '<div class="tier-line tier-total"><span>总价 Total（' + totalTubs + '桶）</span><span class="price">' + money(total) + '</span></div>';
+            html += '<div class="tier-line"><span>均价/桶 Avg per tub</span><span>' + money(Math.round(total / totalTubs)) + '</span></div>';
+            if (total < list) html += '<div class="tier-line tier-hot"><span>比原价省 You save</span><span>' + money(list - total) + '（原价 ' + money(list) + '）</span></div>';
+            result.innerHTML = warn + html;
+            // 第一次算出有效价格时，记一次使用（每个访客每次打开只记一次）
+            if (!tracked && typeof ygTrack === "function") {
+                tracked = true;
+                var names = rows.map(function (e) { return e.name + "x" + e.qty; }).join("+");
+                ygTrack("calculator_use", { category_id: "shuttlecock", model: names, qty: totalTubs });
+            }
+        }
+        [model1, qty1, model2, qty2, model3, qty3].forEach(function (el) {
+            el.addEventListener("change", calc);
+            el.addEventListener("input", calc);
+        });
+        calc();
+    })();
+    </script>
     <p>• 黑航空 Aeroplane EG1130: $37</p>
-    <p>• 翎美 LingMei-F1 = 90Pro: $34</p>
+    <p>• 翎美 LingMei-F1 = 90Pro: $36</p>
     <p>• 尤尼克斯 Yonex: AS50:$43 / AS40:$41 / AS30:$39 / AS05:$32.5</p>
-    <p>• 亚狮龙 RSL: U:$37 / S:$36 / C:$32.5 / 3:$26.5 / 5:$23.5</p>
-    <p>• 金利 JL-(S/A/C）：$34/32/26</p>
+    <p>• 亚狮龙 RSL: U:$38 / S:$36 / C:$32.5 / 3:$26.5 / 5:$23.5</p>
+    <p>• 金利 JL-(S/A/C）：$34/32/27</p>
     <p>• 维克多 Victor: Master1:$37.5 / Champ1:$28.5 / Golden1:$26.5/ NCS MAX:$27/ NCS PRO:$22</p>
-    <p>• 超牌 ChaoPai-(金红超/红超/紫超)：$40/36/32</p>
-    <p><strong>折扣</strong>：购买大牌产品满3桶，每桶减$0.5；购买JL系列产品满3桶，每桶减$1。量大优惠大。<br>
-    Purchase 3 or more tubs of major-brand products and save $0.50 per tub; purchase 3 or more tubs of JL series products and save $1.00 per tub.
-    </p>
+    <p>• 超牌 ChaoPai-(红超/紫超)：$36/32</p>
     <h2 id="stringing">拉线 Stringing</h2>
     <p> • BG65($26)<br>
         • BG65TI($27)<br>
@@ -247,6 +452,9 @@
     <p>需预订。<br>
     Pre-order is required;
     </p>
+    <p class="tier-hot">所有鞋9折<br>
+    All shoes 10% off</p>
+
     <h3>LiNing</h3>
     <div class="carousel-wrap" data-carousel>
         <div class="carousel-head"><span class="carousel-count">1 / 5</span></div>
